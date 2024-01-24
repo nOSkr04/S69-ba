@@ -1,5 +1,5 @@
 import express from "express";
-import { protect, authorize } from "../middleware/protect";
+import { protect, authorize } from "../middleware/protect.js";
 
 import {
   getArticles,
@@ -7,7 +7,7 @@ import {
   createArticle,
   deleteArticle,
   updateArticle,
-} from "../controller/articles";
+} from "../controller/articles.js";
 
 const router = express.Router();
 

@@ -1,7 +1,7 @@
-import Category from "../models/Category";
-import MyError from "../utils/myError";
+import Category from "../models/Category.js";
+import MyError from "../utils/myError.js";
 import asyncHandler from "express-async-handler";
-import paginate from "../utils/paginate";
+import paginate from "../utils/paginate.js";
 
 export const getCategories = asyncHandler(async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;

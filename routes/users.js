@@ -1,4 +1,4 @@
-import { protect, authorize } from "../middleware/protect";
+import { protect, authorize } from "../middleware/protect.js";
 import { Router } from "express";
 import {
   register,
@@ -11,9 +11,9 @@ import {
   forgotPassword,
   resetPassword,
   logout,
-} from "../controller/users";
+} from "../controller/users.js";
 
-import { getUserArticles } from "../controller/articles";
+import { getUserArticles } from "../controller/articles.js";
 
 const router = Router();
 

@@ -1,8 +1,8 @@
-import User from "../models/User";
-import MyError from "../utils/myError";
+import User from "../models/User.js";
+import MyError from "../utils/myError.js";
 import asyncHandler from "express-async-handler";
-import paginate from "../utils/paginate";
-import sendEmail from "../utils/email";
+import paginate from "../utils/paginate.js";
+import sendEmail from "../utils/email.js";
 import crypto from "crypto";
 
 // register

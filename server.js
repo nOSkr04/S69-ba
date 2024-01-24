@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 import rfs from "rotating-file-stream";
 import morgan from "morgan";
-import logger from "./middleware/logger";
+import logger from "./middleware/logger.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoSanitize from "express-mongo-sanitize";
@@ -11,13 +11,13 @@ import helmet from "helmet";
 import xss from "xss-clean";
 import rateLimit from "express-rate-limit";
 import hpp from "hpp";
-
+import color from "colors";
 // Router оруулж ирэх
-import categoriesRoutes from "./routes/categories";
-import articleRoutes from "./routes/articles";
-import usersRoutes from "./routes/users";
-import errorHandler from "./middleware/error";
-import connectDB from "./config/db";
+import categoriesRoutes from "./routes/categories.js";
+import articleRoutes from "./routes/articles.js";
+import usersRoutes from "./routes/users.js";
+import errorHandler from "./middleware/error.js";
+import connectDB from "./config/db.js";
 
 // Аппын тохиргоог process.env рүү ачаалах
 dotenv.config({ path: "./config/config.env" });
@@ -54,7 +54,7 @@ var corsOptions = {
 };
 
 // index.html-ийг public хавтас дотроос ол гэсэн тохиргоо
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(new URL("public", import.meta.url).pathname));
 
 // Express rate limit : Дуудалтын тоог хязгаарлана
 const limiter = rateLimit({
@@ -83,7 +83,7 @@ app.use(mongoSanitize());
 // Morgan logger-ийн тохиргоо
 var accessLogStream = rfs.createStream("access.log", {
   interval: "1d", // rotate daily
-  path: path.join(__dirname, "log"),
+  path: new URL("log", import.meta.url).pathname,
 });
 app.use(morgan("combined", { stream: accessLogStream }));
 

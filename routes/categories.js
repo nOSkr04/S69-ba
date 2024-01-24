@@ -1,16 +1,16 @@
-const { Router } = require("express");
+import { Router } from "express";
 const router = Router();
-import { protect, authorize } from "../middleware/protect";
+import { protect, authorize } from "../middleware/protect.js";
 import {
   getCategories,
   getCategory,
   createCategory,
   updateCategory,
   deleteCategory,
-} from "../controller/categories";
+} from "../controller/categories.js";
 
 // /categories/:id/articles
-import { getCategoryArticles } from "../controller/articles";
+import { getCategoryArticles } from "../controller/articles.js";
 router.route("/:categoryId/articles").get(getCategoryArticles);
 
 //"/api/v1/categories"
