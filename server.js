@@ -18,6 +18,7 @@ import articleRoutes from "./routes/articles.js";
 import usersRoutes from "./routes/users.js";
 import errorHandler from "./middleware/error.js";
 import connectDB from "./config/db.js";
+import mediasRoutes from "./routes/media.js";
 
 // Аппын тохиргоог process.env рүү ачаалах
 dotenv.config({ path: "./config/config.env" });
@@ -91,7 +92,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use("/categories", categoriesRoutes);
 app.use("/articles", articleRoutes);
 app.use("/users", usersRoutes);
-
+app.use("/media", mediasRoutes);
 // Алдаа үүсэхэд барьж авч алдааны мэдээллийг клиент тал руу автоматаар мэдээлнэ
 app.use(errorHandler);
 
