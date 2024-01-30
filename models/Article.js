@@ -2,48 +2,29 @@ import mongoose from "mongoose";
 
 const ArticleSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
-      required: [true, "Номын нэрийг оруулна уу"],
+      required: [true, "Нийтлэлийн гарчиг оруулна уу"],
       unique: true,
       trim: true,
-      maxlength: [250, "Номын нэрний урт дээд тал нь 250 тэмдэгт байх ёстой."],
-    },
-    photo: {
-      type: String,
-      default: "no-photo.jpg",
-    },
-    author: {
-      type: String,
-      required: [true, "Зохиогчийн нэрийг оруулна уу"],
-      trim: true,
       maxlength: [
-        50,
-        "Зохиогчийн нэрний урт дээд тал нь 50 тэмдэгт байх ёстой.",
+        250,
+        "Нийтлэлийн гарчиг урт дээд тал нь 250 тэмдэгт байх ёстой.",
       ],
     },
-    averageRating: {
-      type: Number,
-      min: [1, "Рэйтинг хамгийн багадаа 1 байх ёстой"],
-      max: [10, "Рэйтинг хамгийн ихдээ 10 байх ёстой"],
+    media: {
+      url: String,
+      blurHash: String,
+      thumbnail: String,
     },
-    price: {
-      type: Number,
-      required: [true, "Номны үнийг оруулна уу"],
-      min: [500, "Номын үнэ хамгийн багадаа 500 төгрөг байх ёстой"],
-    },
-    balance: Number,
-    content: {
+    description: {
       type: String,
       required: [true, "Номын тайлбарыг оруулна уу"],
-      trim: true,
-      maxlength: [5000, "Номын нэрний урт дээд тал нь 20 тэмдэгт байх ёстой."],
     },
-    bestseller: {
-      type: Boolean,
-      default: false,
+    seen: {
+      type: Number,
+      default: 0,
     },
-    available: [String],
 
     category: {
       type: mongoose.Schema.ObjectId,
