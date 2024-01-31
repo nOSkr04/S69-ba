@@ -13,8 +13,6 @@ import {
   logout,
 } from "../controller/users.js";
 
-import { getUserArticles } from "../controller/articles.js";
-
 const router = Router();
 
 //"/api/v1/users"
@@ -37,9 +35,5 @@ router
   .get(authorize("admin", "operator"), getUser)
   .put(authorize("admin"), updateUser)
   .delete(authorize("admin"), deleteUser);
-
-router
-  .route("/:id/articles")
-  .get(authorize("admin", "operator", "user"), getUserArticles);
 
 export default router;

@@ -13,8 +13,10 @@ import rateLimit from "express-rate-limit";
 import hpp from "hpp";
 import color from "colors";
 // Router оруулж ирэх
-import categoriesRoutes from "./routes/categories.js";
 import articleRoutes from "./routes/articles.js";
+import adviceRoutes from "./routes/advices.js";
+import lessonRoutes from "./routes/lessons.js";
+import storiesRoutes from "./routes/stories.js";
 import usersRoutes from "./routes/users.js";
 import errorHandler from "./middleware/error.js";
 import connectDB from "./config/db.js";
@@ -89,8 +91,10 @@ var accessLogStream = rfs.createStream("access.log", {
 app.use(morgan("combined", { stream: accessLogStream }));
 
 // REST API RESOURSE
-app.use("/categories", categoriesRoutes);
 app.use("/articles", articleRoutes);
+app.use("/advices", adviceRoutes);
+app.use("/lessons", lessonRoutes);
+app.use("/stories", storiesRoutes);
 app.use("/users", usersRoutes);
 app.use("/media", mediasRoutes);
 // Алдаа үүсэхэд барьж авч алдааны мэдээллийг клиент тал руу автоматаар мэдээлнэ

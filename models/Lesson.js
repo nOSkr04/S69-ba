@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ArticleSchema = new mongoose.Schema(
+const LessonSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -12,9 +12,10 @@ const ArticleSchema = new mongoose.Schema(
         "Нийтлэлийн гарчиг урт дээд тал нь 250 тэмдэгт байх ёстой.",
       ],
     },
-    image: {
+    video: {
       url: String,
       blurHash: String,
+      thumbnail: String,
     },
     description: {
       type: String,
@@ -43,4 +44,4 @@ const ArticleSchema = new mongoose.Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-export default mongoose.model("Article", ArticleSchema);
+export default mongoose.model("Lesson", LessonSchema);
