@@ -84,10 +84,7 @@ export const deleteArticle = asyncHandler(async (req, res, next) => {
     throw new MyError(req.params.id + " ID-тэй ном байхгүй байна.", 404);
   }
 
-  if (
-    article.createUser.toString() !== req.userId &&
-    req.userRole !== "admin"
-  ) {
+  if (req.userRole !== "admin") {
     throw new MyError("Та зөвхөн өөрийнхөө номыг л засварлах эрхтэй", 403);
   }
 
