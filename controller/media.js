@@ -12,14 +12,15 @@ import ffmpeg from "fluent-ffmpeg";
 
 export const uploadPhoto = asyncHandler(async (req, res, next) => {
   const file = req.files.file;
+  console.log(file);
 
   const blurHash = await setBlurHash(file.data);
 
   const config = {
     region: "ap-southeast-1",
-    accessKeyId: "AKIAQE7LVSVREC5V55IO",
-    secretAccessKey: "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",
-    bucket: "sedu-ba",
+    accessKeyId: "AKIAVFEHBPOJXOLCURVV",
+    secretAccessKey: "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",
+    bucket: "neuronsolution",
   };
   AWS.config.update(config);
   const s3 = new AWS.S3({
@@ -46,9 +47,9 @@ export const uploadVideo = asyncHandler(async (req, res) => {
 
   const config = {
     region: "ap-southeast-1",
-    accessKeyId: "AKIAQE7LVSVREC5V55IO",
-    secretAccessKey: "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",
-    bucket: "sedu-ba",
+    accessKeyId: "AKIAVFEHBPOJXOLCURVV",
+    secretAccessKey: "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",
+    bucket: "neuronsolution",
   };
   AWS.config.update(config);
   const s3 = new AWS.S3({
