@@ -32,7 +32,7 @@ export const getArticles = asyncHandler(async (req, res, next) => {
 
 export const articleHome = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 5;
+  const limit = parseInt(req.query.limit) || 20;
   const sort = req.query.sort;
   const select = req.query.select;
   [("select", "sort", "page", "limit")].forEach((el) => delete req.query[el]);
@@ -44,10 +44,19 @@ export const articleHome = asyncHandler(async (req, res) => {
     .skip(pagination.start - 1)
     .limit(limit);
 
+  const filterArticles = await Article.findOne().sort({
+    seen: -1,
+  });
+
+  const filtered = articles.filter(
+    (article) => article.title === filterArticles.title
+  );
+
   res.status(200).json({
     success: true,
     count: articles.length,
-    data: articles,
+    data: filtered,
+    popular: filterArticles,
     pagination,
   });
 });
