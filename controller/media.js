@@ -11,6 +11,7 @@ import fs from "fs";
 import ffmpeg from "fluent-ffmpeg";
 
 export const uploadPhoto = asyncHandler(async (req, res, next) => {
+  console.log(req.files);
   const file = req.files.file;
   console.log(file);
 
