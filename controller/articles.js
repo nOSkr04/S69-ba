@@ -30,12 +30,37 @@ export const getArticles = asyncHandler(async (req, res, next) => {
   });
 });
 
+export const articleHome = asyncHandler(async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+  const sort = req.query.sort;
+  const select = req.query.select;
+  [("select", "sort", "page", "limit")].forEach((el) => delete req.query[el]);
+
+  const pagination = await paginate(page, limit, Article);
+
+  const articles = await Article.find(req.query, select)
+    .sort(sort)
+    .skip(pagination.start - 1)
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    count: articles.length,
+    data: articles,
+    pagination,
+  });
+});
+
 export const getArticle = asyncHandler(async (req, res, next) => {
   const article = await Article.findById(req.params.id);
 
   if (!article) {
     throw new MyError(req.params.id + " ID-тэй ном байхгүй байна.", 404);
   }
+
+  article.seen += 1;
+  article.save();
 
   res.status(200).json({
     success: true,

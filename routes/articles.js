@@ -7,6 +7,7 @@ import {
   createArticle,
   deleteArticle,
   updateArticle,
+  articleHome,
 } from "../controller/articles.js";
 
 const router = express.Router();
@@ -16,6 +17,8 @@ router
   .route("/")
   .get(getArticles)
   .post(protect, authorize("admin", "operator"), createArticle);
+
+router.route("/home").get(articleHome);
 
 router
   .route("/:id")
