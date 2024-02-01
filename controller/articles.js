@@ -49,7 +49,7 @@ export const articleHome = asyncHandler(async (req, res) => {
   });
 
   const filtered = articles.filter(
-    (article) => article.title === filterArticles.title
+    (article) => article.title !== filterArticles.title
   );
 
   res.status(200).json({
