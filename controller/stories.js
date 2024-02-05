@@ -37,6 +37,9 @@ export const getStory = asyncHandler(async (req, res, next) => {
     throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүй байна.", 404);
   }
 
+  story.seen += 1;
+  story.save();
+
   res.status(200).json({
     success: true,
     data: story,

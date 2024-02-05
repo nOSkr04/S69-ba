@@ -37,6 +37,9 @@ export const getLesson = asyncHandler(async (req, res, next) => {
     throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүй байна.", 404);
   }
 
+  lesson.seen += 1;
+  lesson.save();
+
   res.status(200).json({
     success: true,
     data: lesson,

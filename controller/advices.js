@@ -37,6 +37,9 @@ export const getAdvice = asyncHandler(async (req, res, next) => {
     throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүй байна.", 404);
   }
 
+  advice.seen += 1;
+  advice.save();
+
   res.status(200).json({
     success: true,
     data: advice,
