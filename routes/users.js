@@ -22,7 +22,7 @@ router.route("/login").post(login);
 router.route("/logout").get(logout);
 router.route("/forgot-password").post(forgotPassword);
 router.route("/reset-password").post(resetPassword);
-
+router.route("/me").get(protect, authMeUser);
 router.use(protect);
 
 //"/api/v1/users"
@@ -36,5 +36,5 @@ router
   .get(authorize("admin", "operator"), getUser)
   .put(authorize("admin"), updateUser)
   .delete(authorize("admin"), deleteUser);
-router.route("/me").get(protect, authMeUser);
+
 export default router;
