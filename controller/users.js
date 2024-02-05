@@ -5,6 +5,17 @@ import paginate from "../utils/paginate.js";
 import sendEmail from "../utils/email.js";
 import crypto from "crypto";
 
+export const authMeUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.userId);
+  if (!user) {
+    throw new MyError(req.params.id, 401);
+  }
+  res.status(200).json({
+    success: true,
+    data: user,
+  });
+});
+
 // register
 export const register = asyncHandler(async (req, res, next) => {
   const user = await User.create(req.body);

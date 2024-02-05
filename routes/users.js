@@ -11,6 +11,7 @@ import {
   forgotPassword,
   resetPassword,
   logout,
+  authMeUser,
 } from "../controller/users.js";
 
 const router = Router();
@@ -35,5 +36,5 @@ router
   .get(authorize("admin", "operator"), getUser)
   .put(authorize("admin"), updateUser)
   .delete(authorize("admin"), deleteUser);
-
+router.route("/me").get(protect, authMeUser);
 export default router;
