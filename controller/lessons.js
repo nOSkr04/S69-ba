@@ -62,7 +62,7 @@ export const deleteLesson = asyncHandler(async (req, res, next) => {
     throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүй байна.", 404);
   }
 
-  if (lesson.createUser.toString() !== req.userId && req.userRole !== "admin") {
+  if (req.userRole !== "admin") {
     throw new MyError("Та зөвхөн өөрийнхөө нийтлэлыг л засварлах эрхтэй", 403);
   }
 

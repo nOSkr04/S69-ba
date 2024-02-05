@@ -16,9 +16,7 @@ const LessonSchema = new mongoose.Schema(
       url: String,
       blurHash: String,
     },
-    video: {
-      url: String,
-    },
+    video: String,
     duration: String,
     sort: Number,
     seen: {
