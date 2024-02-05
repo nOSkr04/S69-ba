@@ -16,10 +16,9 @@ const StorySchema = new mongoose.Schema(
       url: String,
       blurHash: String,
     },
-    description: {
-      type: String,
-      required: [true, "Зөвлөгөө тайлбарыг оруулна уу"],
-    },
+    music: String,
+    duration: String,
+    sort: Number,
     seen: {
       type: Number,
       default: 0,
