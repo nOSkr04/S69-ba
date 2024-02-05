@@ -17,6 +17,8 @@ import articleRoutes from "./routes/articles.js";
 import adviceRoutes from "./routes/advices.js";
 import lessonRoutes from "./routes/lessons.js";
 import storiesRoutes from "./routes/stories.js";
+import walletsRoutes from "./routes/wallets.js";
+import notificationsRoutes from "./routes/notifications.js";
 import usersRoutes from "./routes/users.js";
 import errorHandler from "./middleware/error.js";
 import connectDB from "./config/db.js";
@@ -97,6 +99,8 @@ app.use("/lessons", lessonRoutes);
 app.use("/stories", storiesRoutes);
 app.use("/users", usersRoutes);
 app.use("/media", mediasRoutes);
+app.use("/wallets", walletsRoutes);
+app.use("/notification", notificationsRoutes);
 // Алдаа үүсэхэд барьж авч алдааны мэдээллийг клиент тал руу автоматаар мэдээлнэ
 app.use(errorHandler);
 
