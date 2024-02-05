@@ -34,7 +34,7 @@ export const getAdvice = asyncHandler(async (req, res, next) => {
   const advice = await Advice.findById(req.params.id);
 
   if (!advice) {
-    throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүй байна.", 404);
+    throw new MyError(req.params.id + " ID-тэй ном байхгүй байна.", 404);
   }
 
   advice.seen += 1;
@@ -59,11 +59,11 @@ export const deleteAdvice = asyncHandler(async (req, res, next) => {
   const advice = await Advice.findById(req.params.id);
 
   if (!advice) {
-    throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүй байна.", 404);
+    throw new MyError(req.params.id + " ID-тэй ном байхгүй байна.", 404);
   }
 
-  if (advice.createUser.toString() !== req.userId && req.userRole !== "admin") {
-    throw new MyError("Та зөвхөн өөрийнхөө нийтлэлыг л засварлах эрхтэй", 403);
+  if (req.userRole !== "admin") {
+    throw new MyError("Та зөвхөн өөрийнхөө номыг л засварлах эрхтэй", 403);
   }
 
   const user = await User.findById(req.userId);
@@ -81,11 +81,11 @@ export const updateAdvice = asyncHandler(async (req, res, next) => {
   const advice = await Advice.findById(req.params.id);
 
   if (!advice) {
-    throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүйээээ.", 400);
+    throw new MyError(req.params.id + " ID-тэй ном байхгүйээээ.", 400);
   }
 
   if (advice.createUser.toString() !== req.userId && req.userRole !== "admin") {
-    throw new MyError("Та зөвхөн өөрийнхөө нийтлэлыг л засварлах эрхтэй", 403);
+    throw new MyError("Та зөвхөн өөрийнхөө номыг л засварлах эрхтэй", 403);
   }
 
   req.body.updateUser = req.userId;
