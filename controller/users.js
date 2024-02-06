@@ -287,8 +287,8 @@ export const invoiceTime = asyncHandler(async (req, res, next) => {
         data: {
           invoice_code: "SANTA_MN_INVOICE",
           sender_invoice_no: "12345678",
-          invoice_receiver_code: `${profile.phone}`,
-          invoice_description: `S69 access ${profile.phone}`,
+          invoice_receiver_code: `${profile.username}`,
+          invoice_description: `S69 access ${profile.username}`,
           amount: req.body.amount,
           callback_url: `https://santa.mn/users/callbacks/${req.params.id}/${req.body.amount}`,
         },
