@@ -12,6 +12,7 @@ import {
   resetPassword,
   logout,
   authMeUser,
+  userPrivacy,
 } from "../controller/users.js";
 
 const router = Router();
@@ -23,6 +24,7 @@ router.route("/logout").get(logout);
 router.route("/forgot-password").post(forgotPassword);
 router.route("/reset-password").post(resetPassword);
 router.route("/me").get(protect, authMeUser);
+router.route("/privacy").get(userPrivacy);
 router.use(protect);
 
 //"/api/v1/users"
