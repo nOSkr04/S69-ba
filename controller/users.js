@@ -346,6 +346,16 @@ export const invoiceCheck = asyncHandler(async (req, res) => {
               success: false,
             });
           } else {
+            const price = parseInt(req.params.numId, 10);
+            if (price === 100) {
+              profile.isPayment = true;
+              await sendNotification(
+                profile.expoPushToken,
+                "Үйлчилгээний эрх нээгдлээ"
+              );
+              profile.save();
+            }
+            console.log(price, "price check <>");
             res.status(200).json({
               success: true,
               data: profile,
@@ -363,19 +373,22 @@ export const invoiceCheck = asyncHandler(async (req, res) => {
 
 export const chargeTime = asyncHandler(async (req, res, next) => {
   const profile = await User.findById(req.params.id);
-  await sendNotification(profile.expoPushToken, `Үйлчилгээний эрх нээгдлээ`);
+  const price = parseInt(req.params.numId, 10);
+  if (price === 100) {
+    await sendNotification(profile.expoPushToken, `Үйлчилгээний эрх нээгдлээ`);
 
-  await Notification.create({
-    title: `Үйлчилгээний эрх нээгдлээ`,
-    users: profile._id,
-  });
+    await Notification.create({
+      title: `Үйлчилгээний эрх нээгдлээ`,
+      users: profile._id,
+    });
 
-  await User.updateOne(
-    { _id: profile._id },
-    { $inc: { notificationCount: 1 } }
-  );
-  profile.isPayment = true;
-  profile.save();
+    await User.updateOne(
+      { _id: profile._id },
+      { $inc: { notificationCount: 1 } }
+    );
+    profile.isPayment = true;
+    profile.save();
+  }
 
   res.status(200).json({
     success: true,
