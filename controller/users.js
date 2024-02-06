@@ -67,7 +67,12 @@ export const register = asyncHandler(async (req, res, next) => {
 
   const token = user.getJsonWebToken();
 
-  res.status(200).json({
+  const cookieOption = {
+    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    httpOnly: true,
+  };
+
+  res.status(200).cookie("s69-token", token, cookieOption).json({
     success: true,
     token,
     user: user,
