@@ -7,7 +7,7 @@ import crypto from "crypto";
 import Wallet from "../models/Wallet.js";
 import sendNotification from "../utils/sendNotification.js";
 import Notification from "../models/Notification.js";
-
+import axios from "axios";
 export const authMeUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.userId);
   if (!user) {
