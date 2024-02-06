@@ -20,10 +20,16 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Нууц үгээ оруулна уу"],
     select: false,
   },
+  notificationCount: {
+    type: Number,
+    default: 0,
+  },
   isPayment: {
     type: Boolean,
     default: false,
   },
+  invoiceId: String,
+  expoPushToken: String,
   resetPasswordToken: String,
   resetPasswordExpire: Date,
   createdAt: {
