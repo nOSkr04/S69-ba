@@ -4,6 +4,9 @@ import asyncHandler from "express-async-handler";
 import paginate from "../utils/paginate.js";
 import sendEmail from "../utils/email.js";
 import crypto from "crypto";
+import Wallet from "../models/Wallet.js";
+import sendNotification from "../utils/sendNotification.js";
+import Notification from "../models/Notification.js";
 
 export const authMeUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.userId);
@@ -260,5 +263,119 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
     success: true,
     token,
     user: user,
+  });
+});
+
+export const invoiceTime = asyncHandler(async (req, res, next) => {
+  const profile = await User.findById(req.params.id);
+  await axios({
+    method: "post",
+    url: "https://merchant.qpay.mn/v2/auth/token",
+    headers: {
+      Authorization: `Basic U0FOVEFfTU46Z3F2SWlKSnI=`,
+    },
+  })
+    .then((response) => {
+      const token = response.data.access_token;
+
+      axios({
+        method: "post",
+        url: "https://merchant.qpay.mn/v2/invoice",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          invoice_code: "SANTA_MN_INVOICE",
+          sender_invoice_no: "12345678",
+          invoice_receiver_code: `${profile.phone}`,
+          invoice_description: `S69 access ${profile.phone}`,
+          amount: req.body.amount,
+          callback_url: `https://santa.mn/users/callbacks/${req.params.id}/${req.body.amount}`,
+        },
+      })
+        .then(async (response) => {
+          req.body.urls = response.data.urls;
+          req.body.qrImage = response.data.qr_image;
+          req.body.invoiceId = response.data.invoice_id;
+          const wallet = await Wallet.create(req.body);
+          profile.invoiceId = wallet._id;
+          profile.save();
+          res.status(200).json({
+            success: true,
+            data: wallet._id,
+          });
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    })
+    .catch((error) => {
+      console.log(error.response.data);
+    });
+});
+
+export const invoiceCheck = asyncHandler(async (req, res) => {
+  await axios({
+    method: "post",
+    url: "https://merchant.qpay.mn/v2/auth/token",
+    headers: {
+      Authorization: `Basic U0FOVEFfTU46Z3F2SWlKSnI=`,
+    },
+  })
+    .then((response) => {
+      const token = response.data.access_token;
+      axios({
+        method: "post",
+        url: "https://merchant.qpay.mn/v2/payment/check",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          object_type: "INVOICE",
+          object_id: req.params.id,
+          page_number: 1,
+          page_limit: 100,
+          callback_url: `https://santa.mn/users/check/challbacks/${req.params.id}/${req.params.numId}`,
+        },
+      })
+        .then(async (response) => {
+          const profile = await User.findById(req.params.numId);
+          const count = response.data.count;
+          if (count === 0) {
+            res.status(402).json({
+              success: false,
+            });
+          } else {
+            res.status(200).json({
+              success: true,
+              data: profile,
+            });
+          }
+        })
+        .catch((error) => {
+          // console.log(error, "error");
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+export const chargeTime = asyncHandler(async (req, res, next) => {
+  const profile = await User.findById(req.params.id);
+  await sendNotification(profile.expoPushToken, `Үйлчилгээний эрх нээгдлээ`);
+  await Notification.create({
+    title: `Үйлчилгээний эрх нээгдлээ`,
+    users: profile._id,
+  });
+  await User.updateOne(
+    { _id: profile._id },
+    { $inc: { notificationCount: 1 } }
+  );
+  profile.save();
+
+  res.status(200).json({
+    success: true,
+    data: profile,
   });
 });

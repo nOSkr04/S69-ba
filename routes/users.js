@@ -13,6 +13,9 @@ import {
   logout,
   authMeUser,
   userPrivacy,
+  chargeTime,
+  invoiceCheck,
+  invoiceTime,
 } from "../controller/users.js";
 
 const router = Router();
@@ -25,6 +28,9 @@ router.route("/forgot-password").post(forgotPassword);
 router.route("/reset-password").post(resetPassword);
 router.route("/me").get(protect, authMeUser);
 router.route("/privacy").get(userPrivacy);
+router.route("/callbacks/:id/:numId").get(chargeTime);
+router.route("/check/challbacks/:id/:numId").get(invoiceCheck);
+
 router.use(protect);
 
 //"/api/v1/users"
@@ -32,6 +38,8 @@ router
   .route("/")
   .get(authorize("admin"), getUsers)
   .post(authorize("admin"), createUser);
+
+router.route("/invoice/:id").post(invoiceTime);
 
 router
   .route("/:id")
