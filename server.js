@@ -81,7 +81,7 @@ app.use(cors(corsOptions));
 // Клиент вэб аппуудыг мөрдөх ёстой нууцлал хамгаалалтыг http header ашиглан зааж өгнө
 app.use(helmet());
 // клиент сайтаас ирэх Cross site scripting халдлагаас хамгаална
-app.use(xss());
+// app.use(xss());
 // Клиент сайтаас дамжуулж буй MongoDB өгөгдлүүдийг халдлагаас цэвэрлэнэ
 app.use(mongoSanitize());
 
