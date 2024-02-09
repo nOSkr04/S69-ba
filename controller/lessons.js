@@ -1,5 +1,5 @@
 import path from "path";
-import Lesson from "../models/Lesson.js";
+import Lesson from "../models/Advice.js";
 
 import MyError from "../utils/myError.js";
 import asyncHandler from "express-async-handler";
@@ -34,7 +34,7 @@ export const getLesson = asyncHandler(async (req, res, next) => {
   const lesson = await Lesson.findById(req.params.id);
 
   if (!lesson) {
-    throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүй байна.", 404);
+    throw new MyError(req.params.id + " ID-тэй ном байхгүй байна.", 404);
   }
 
   lesson.seen += 1;
@@ -59,11 +59,11 @@ export const deleteLesson = asyncHandler(async (req, res, next) => {
   const lesson = await Lesson.findById(req.params.id);
 
   if (!lesson) {
-    throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүй байна.", 404);
+    throw new MyError(req.params.id + " ID-тэй ном байхгүй байна.", 404);
   }
 
   if (req.userRole !== "admin") {
-    throw new MyError("Та зөвхөн өөрийнхөө нийтлэлыг л засварлах эрхтэй", 403);
+    throw new MyError("Та зөвхөн өөрийнхөө номыг л засварлах эрхтэй", 403);
   }
 
   const user = await User.findById(req.userId);
@@ -81,11 +81,11 @@ export const updateLesson = asyncHandler(async (req, res, next) => {
   const lesson = await Lesson.findById(req.params.id);
 
   if (!lesson) {
-    throw new MyError(req.params.id + " ID-тэй нийтлэл байхгүйээээ.", 400);
+    throw new MyError(req.params.id + " ID-тэй ном байхгүйээээ.", 400);
   }
 
   if (lesson.createUser.toString() !== req.userId && req.userRole !== "admin") {
-    throw new MyError("Та зөвхөн өөрийнхөө нийтлэлыг л засварлах эрхтэй", 403);
+    throw new MyError("Та зөвхөн өөрийнхөө номыг л засварлах эрхтэй", 403);
   }
 
   req.body.updateUser = req.userId;

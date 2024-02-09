@@ -4,22 +4,21 @@ const AdviceSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, "Зөвлөгөө гарчиг оруулна уу"],
+      required: [true, "Сургалт гарчиг оруулна уу"],
       unique: true,
       trim: true,
       maxlength: [
         250,
-        "Зөвлөгөө гарчиг урт дээд тал нь 250 тэмдэгт байх ёстой.",
+        "Сургалт гарчиг урт дээд тал нь 250 тэмдэгт байх ёстой.",
       ],
     },
     image: {
       url: String,
       blurHash: String,
     },
-    description: {
-      type: String,
-      required: [true, "Зөвлөгөө тайлбарыг оруулна уу"],
-    },
+    video: String,
+    duration: String,
+    sort: Number,
     seen: {
       type: Number,
       default: 0,
