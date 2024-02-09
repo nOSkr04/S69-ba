@@ -1,5 +1,5 @@
 import path from "path";
-import Advice from "../models/Lesson.js";
+import Advice from "../models/Advice.js";
 
 import MyError from "../utils/myError.js";
 import asyncHandler from "express-async-handler";
