@@ -355,6 +355,10 @@ export const invoiceCheck = asyncHandler(async (req, res) => {
             // if (price === 100) {
             profile.isPayment = true;
             profile.save();
+            await Notification.create({
+              title: `Үйлчилгээний эрх нээгдлээ`,
+              users: profile._id,
+            });
             await sendNotification(
               profile.expoPushToken,
               "Үйлчилгээний эрх нээгдлээ"
