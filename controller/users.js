@@ -122,6 +122,11 @@ export const logout = asyncHandler(async (req, res, next) => {
     httpOnly: true,
   };
 
+  const user = await User.findById(req.userId);
+
+  user.expoPushToken = null;
+  user.save();
+
   res.status(200).cookie("s69-token", null, cookieOption).json({
     success: true,
     data: "logged out...",
