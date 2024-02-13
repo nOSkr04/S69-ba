@@ -9,6 +9,7 @@ import sendNotification from "../utils/sendNotification.js";
 import Notification from "../models/Notification.js";
 import axios from "axios";
 export const authMeUser = asyncHandler(async (req, res) => {
+  console.log(req.userId);
   const user = await User.findById(req.userId);
   if (!user) {
     throw new MyError(req.params.id, 401);
