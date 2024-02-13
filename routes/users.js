@@ -26,7 +26,6 @@ router.route("/login").post(login);
 router.route("/logout").get(logout);
 router.route("/forgot-password").post(forgotPassword);
 router.route("/reset-password").post(resetPassword);
-router.route("/me").get(protect, authMeUser);
 router.route("/privacy").get(userPrivacy);
 router.route("/callbacks/:id/:numId").get(chargeTime);
 router.route("/check/challbacks/:id/:numId").get(invoiceCheck);
@@ -38,7 +37,7 @@ router
   .route("/")
   .get(authorize("admin"), getUsers)
   .post(authorize("admin"), createUser);
-
+router.route("/me").get(authMeUser);
 router.route("/invoice/:id").post(invoiceTime);
 
 router
