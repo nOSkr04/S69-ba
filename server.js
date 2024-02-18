@@ -38,6 +38,7 @@ connectDB();
 // Манай рест апиг дуудах эрхтэй сайтуудын жагсаалт :
 var whitelist = [
   "http://localhost:3000",
+  "http://localhost:3005",
   "https://santa.mn",
   "https://www.santa.mn",
 ];
