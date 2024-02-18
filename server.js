@@ -40,7 +40,9 @@ var whitelist = [
   "http://localhost:3000",
   "http://localhost:3005",
   "https://santa.mn",
+  "https://s69.mn",
   "https://www.santa.mn",
+  "https://www.s69.mn",
 ];
 
 // Өөр домэйн дээр байрлах клиент вэб аппуудаас шаардах шаардлагуудыг энд тодорхойлно
