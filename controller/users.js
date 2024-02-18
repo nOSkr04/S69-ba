@@ -308,7 +308,7 @@ export const invoiceTime = asyncHandler(async (req, res, next) => {
           profile.save();
           res.status(200).json({
             success: true,
-            data: wallet._id,
+            data: wallet,
           });
         })
         .catch((error) => {
