@@ -9,7 +9,6 @@ import sendNotification from "../utils/sendNotification.js";
 import Notification from "../models/Notification.js";
 import axios from "axios";
 export const authMeUser = asyncHandler(async (req, res) => {
-  console.log(req.userId);
   const user = await User.findById(req.userId);
   if (!user) {
     throw new MyError(req.params.id, 401);
@@ -87,20 +86,20 @@ export const login = asyncHandler(async (req, res, next) => {
   // Оролтыгоо шалгана
 
   if (!username || !password) {
-    throw new MyError("Имэл болон нууц үйгээ дамжуулна уу", 400);
+    throw new MyError("Нэвтрэх нэр болон нууц үйгээ дамжуулна уу", 400);
   }
 
   // Тухайн хэрэглэгчийн хайна
   const user = await User.findOne({ username }).select("+password");
 
   if (!user) {
-    throw new MyError("Имэйл болон нууц үгээ зөв оруулна уу", 401);
+    throw new MyError("Нэвтрэх нэр болон нууц үгээ зөв оруулна уу", 401);
   }
 
   const ok = await user.checkPassword(password);
 
   if (!ok) {
-    throw new MyError("Имэйл болон нууц үгээ зөв оруулна уу", 401);
+    throw new MyError("Нэвтрэх нэр болон нууц үгээ зөв оруулна уу", 401);
   }
 
   const token = user.getJsonWebToken();
@@ -206,7 +205,10 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
 
 export const forgotPassword = asyncHandler(async (req, res, next) => {
   if (!req.body.email) {
-    throw new MyError("Та нууц үг сэргээх имэйл хаягаа дамжуулна уу", 400);
+    throw new MyError(
+      "Та нууц үг сэргээх Нэвтрэх нэр хаягаа дамжуулна уу",
+      400
+    );
   }
 
   const user = await User.findOne({ email: req.body.email });

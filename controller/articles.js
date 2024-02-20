@@ -1,5 +1,8 @@
 import path from "path";
 import Article from "../models/Article.js";
+import Lesson from "../models/Lesson.js";
+import Advice from "../models/Advice.js";
+import Story from "../models/Story.js";
 
 import MyError from "../utils/myError.js";
 import asyncHandler from "express-async-handler";
@@ -27,6 +30,21 @@ export const getArticles = asyncHandler(async (req, res, next) => {
     count: articles.length,
     data: articles,
     pagination,
+  });
+});
+
+export const getWebHome = asyncHandler(async (req, res, next) => {
+  // const articles = await Article.find().limit(3).skip();
+  // const lessons = await Lesson.find().limit(3);
+  // const advices = await Advice.find().limit(3);
+  // const stories = await Story.find().limit(3);
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+
+  res.status(200).json({
+    success: true,
+    // count: articles.length,
+    // data: articles,
   });
 });
 
