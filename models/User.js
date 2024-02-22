@@ -28,6 +28,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isAdult: {
+    type: Boolean,
+    default: false,
+  },
   invoiceId: String,
   expoPushToken: String,
   resetPasswordToken: String,
