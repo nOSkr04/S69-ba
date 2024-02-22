@@ -40,8 +40,8 @@ router
   .get(authorize("admin"), getUsers)
   .post(authorize("admin"), createUser);
 router.route("/me").get(authMeUser);
-router.route("/deleteAccount").get(deleteMe);
-router.route("/adultVerify").get(adultVerify);
+router.route("/deleteAccount").post(deleteMe);
+router.route("/adultVerify").post(adultVerify);
 router.route("/invoice/:id").post(invoiceTime);
 
 router
