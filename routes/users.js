@@ -16,6 +16,7 @@ import {
   chargeTime,
   invoiceCheck,
   invoiceTime,
+  deleteMe,
 } from "../controller/users.js";
 
 const router = Router();
@@ -38,6 +39,7 @@ router
   .get(authorize("admin"), getUsers)
   .post(authorize("admin"), createUser);
 router.route("/me").get(authMeUser);
+router.route("/deleteAccount").get(deleteMe);
 router.route("/invoice/:id").post(invoiceTime);
 
 router

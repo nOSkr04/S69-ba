@@ -203,6 +203,15 @@ export const deleteUser = asyncHandler(async (req, res, next) => {
   });
 });
 
+export const deleteMe = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.userId);
+  user.remove();
+  res.status(200).json({
+    success: true,
+    data: user,
+  });
+});
+
 export const forgotPassword = asyncHandler(async (req, res, next) => {
   if (!req.body.email) {
     throw new MyError(
