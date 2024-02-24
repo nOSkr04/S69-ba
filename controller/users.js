@@ -381,10 +381,12 @@ export const invoiceCheck = asyncHandler(async (req, res) => {
               title: `Үйлчилгээний эрх нээгдлээ`,
               users: profile._id,
             });
-            await sendNotification(
-              profile.expoPushToken,
-              "Үйлчилгээний эрх нээгдлээ"
-            );
+            if (profile.expoPushToken) {
+              await sendNotification(
+                profile.expoPushToken,
+                "Үйлчилгээний эрх нээгдлээ"
+              );
+            }
             // }
             res.status(200).json({
               success: true,
