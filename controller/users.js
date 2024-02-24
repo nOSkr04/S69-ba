@@ -414,7 +414,9 @@ export const chargeTime = asyncHandler(async (req, res, next) => {
     { _id: profile._id },
     { $inc: { notificationCount: 1 } }
   );
-  await sendNotification(profile.expoPushToken, `Үйлчилгээний эрх нээгдлээ`);
+  if (profile.expoPushToken) {
+    await sendNotification(profile.expoPushToken, `Үйлчилгээний эрх нээгдлээ`);
+  }
 
   await Notification.create({
     title: `Үйлчилгээний эрх нээгдлээ`,
