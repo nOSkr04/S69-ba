@@ -15,6 +15,7 @@ import color from "colors";
 // Router оруулж ирэх
 import articleRoutes from "./routes/articles.js";
 import adviceRoutes from "./routes/advices.js";
+import exerciseRoutes from "./routes/exercises.js";
 import lessonRoutes from "./routes/lessons.js";
 import storiesRoutes from "./routes/stories.js";
 import walletsRoutes from "./routes/wallets.js";
@@ -103,6 +104,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 // REST API RESOURSE
 app.use("/articles", articleRoutes);
 app.use("/advices", adviceRoutes);
+app.use("/exercises", exerciseRoutes);
 app.use("/lessons", lessonRoutes);
 app.use("/stories", storiesRoutes);
 app.use("/users", usersRoutes);
