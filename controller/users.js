@@ -374,7 +374,7 @@ export const invoiceCheck = asyncHandler(async (req, res) => {
             });
           } else {
             const price = parseInt(req.params.numId, 10);
-            // if (price === 100) {
+            console.log(price);
             profile.isPayment = true;
             profile.save();
             await Notification.create({
@@ -406,6 +406,7 @@ export const invoiceCheck = asyncHandler(async (req, res) => {
 export const chargeTime = asyncHandler(async (req, res, next) => {
   const profile = await User.findById(req.params.id);
   const price = parseInt(req.params.numId, 10);
+  console.log(price, "chargeTime");
   // if (price === 100) {
   profile.isPayment = true;
   profile.save();
