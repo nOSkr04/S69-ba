@@ -30,7 +30,10 @@ const ExerciseSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-
+    isSport: {
+      type: Boolean,
+      default: false,
+    },
     createUser: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
