@@ -26,11 +26,11 @@ const UserSchema = new mongoose.Schema({
   },
   isPayment: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   isAdult: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   invoiceId: String,
   expoPushToken: String,
