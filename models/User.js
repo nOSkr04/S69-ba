@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [true, "Хэрэглэгчийн нэрийг оруулна уу"],
+    unique: true,
   },
   role: {
     type: String,
