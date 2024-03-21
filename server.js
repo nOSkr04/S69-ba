@@ -21,6 +21,7 @@ import storiesRoutes from "./routes/stories.js";
 import walletsRoutes from "./routes/wallets.js";
 import notificationsRoutes from "./routes/notifications.js";
 import usersRoutes from "./routes/users.js";
+import chatRoutes from "./routes/chats.js";
 import errorHandler from "./middleware/error.js";
 import connectDB from "./config/db.js";
 import mediasRoutes from "./routes/media.js";
@@ -111,6 +112,7 @@ app.use("/users", usersRoutes);
 app.use("/media", mediasRoutes);
 app.use("/wallets", walletsRoutes);
 app.use("/notification", notificationsRoutes);
+app.use("/chat", chatRoutes);
 // Алдаа үүсэхэд барьж авч алдааны мэдээллийг клиент тал руу автоматаар мэдээлнэ
 app.use(errorHandler);
 

@@ -41,6 +41,7 @@
     "node-cron": "3.0.2",
     "nodemailer": "6.7.2",
     "nodemon": "^3.0.1",
+    "openai": "^4.29.2",
     "os": "^0.1.2",
     "path": "^0.12.7",
     "qs": "6.11.0",
@@ -51,7 +52,7 @@
     "xss-clean": "0.1.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2",
-    "@types/fluent-ffmpeg": "^2.1.22"
+    "@types/fluent-ffmpeg": "^2.1.22",
+    "nodemon": "^2.0.2"
   }
 }
