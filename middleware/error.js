@@ -23,7 +23,7 @@ const errorHandler = (err, req, res, next) => {
   }
 
   if (error.code === 11000) {
-    error.message = "Энэ талбарын утгыг давхардуулж өгч болохгүй!";
+    error.message = "Бүртгэлтэй хэрэглэгч байна. Та өөр нэрээр бүртгүүлнэ үү";
     error.statusCode = 400;
   }
 

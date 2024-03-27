@@ -93,7 +93,7 @@ export const login = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ username }).select("+password");
 
   if (!user) {
-    throw new MyError("Нэвтрэх нэр болон нууц үгээ зөв оруулна уу", 401);
+    throw new MyError("Бүртгэлгүй хэрэглэгч байна", 401);
   }
 
   const ok = await user.checkPassword(password);
@@ -117,6 +117,9 @@ export const login = asyncHandler(async (req, res, next) => {
 });
 
 export const logout = asyncHandler(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.userId, {
+    isAdult: false,
+  });
   const cookieOption = {
     expires: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000),
     httpOnly: true,
