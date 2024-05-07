@@ -26,6 +26,10 @@ const ExerciseSchema = new mongoose.Schema(
         blurHash: String,
       },
     ],
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
     seen: {
       type: Number,
       default: 0,
