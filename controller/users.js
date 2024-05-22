@@ -116,6 +116,17 @@ export const login = asyncHandler(async (req, res, next) => {
   });
 });
 
+export const onCompleteAllUser = asyncHandler(async (req, res) => {
+  const result = await User.updateMany({}, { isComplete: true });
+  if (!result) {
+    throw new MyError("Амжилтгүй боллоо", 400);
+  }
+  res.status(200).json({
+    success: true,
+    result,
+  });
+});
+
 export const logout = asyncHandler(async (req, res, next) => {
   await User.findByIdAndUpdate(req.userId, {
     isAdult: false,
