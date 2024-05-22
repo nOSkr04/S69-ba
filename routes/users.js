@@ -18,12 +18,14 @@ import {
   invoiceTime,
   deleteMe,
   adultVerify,
+  onCompleteAllUser,
 } from "../controller/users.js";
 
 const router = Router();
 
 //"/api/v1/users"
 router.route("/register").post(register);
+router.route("/completeUsers").post(onCompleteAllUser);
 router.route("/login").post(login);
 router.route("/logout").get(protect, logout);
 router.route("/forgot-password").post(forgotPassword);
