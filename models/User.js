@@ -42,7 +42,7 @@ const UserSchema = new mongoose.Schema({
     default: Date.now,
   },
   isComplete: {
-    default: false,
+    default: true,
     type: Boolean,
   },
 });
