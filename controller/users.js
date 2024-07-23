@@ -351,7 +351,7 @@ export const invoiceTime = asyncHandler(async (req, res, next) => {
         });
     })
     .catch((error) => {
-      console.log(error, "see error");
+      console.log(error.response, "response");
       console.log(error.response.data);
     });
 });
