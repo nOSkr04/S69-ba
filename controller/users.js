@@ -331,7 +331,7 @@ export const invoiceTime = asyncHandler(async (req, res, next) => {
           invoice_receiver_code: `${profile.username}`,
           invoice_description: `S69 access ${profile.username}`,
           amount: 20000,
-          callback_url: `https://santa.mn/users/callbacks/${req.params.id}/${req.body.amount}`,
+          callback_url: `https://s69server.com/users/callbacks/${req.params.id}/${req.body.amount}`,
         },
       })
         .then(async (response) => {
@@ -377,7 +377,7 @@ export const invoiceCheck = asyncHandler(async (req, res) => {
           object_id: req.params.id,
           page_number: 1,
           page_limit: 100,
-          callback_url: `https://santa.mn/users/check/challbacks/${req.params.id}/${req.params.numId}`,
+          callback_url: `https://s69server.com/users/check/challbacks/${req.params.id}/${req.params.numId}`,
         },
       })
         .then(async (response) => {
