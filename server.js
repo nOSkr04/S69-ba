@@ -108,7 +108,7 @@ app.use("/articles", articleRoutes);
 app.use("/advices", adviceRoutes);
 app.use("/exercises", exerciseRoutes);
 app.use("/lessons", lessonRoutes);
-app.use("/narrative", narrativeRoutes);
+app.use("/narratives", narrativeRoutes);
 app.use("/users", usersRoutes);
 app.use("/media", mediasRoutes);
 app.use("/wallets", walletsRoutes);
