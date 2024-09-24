@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const StorySchema = new mongoose.Schema(
+const NarrativeSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -45,4 +45,4 @@ const StorySchema = new mongoose.Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-export default mongoose.model("Story", StorySchema);
+export default mongoose.model("Narrative", NarrativeSchema);

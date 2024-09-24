@@ -3,7 +3,7 @@ import asyncHandler from "./asyncHandle.js";
 import MyError from "../utils/myError.js";
 
 export const protect = asyncHandler(async (req, res, next) => {
-  // console.log(req.headers);
+  console.log(req.headers);
   let token = null;
 
   if (req.headers.authorization) {

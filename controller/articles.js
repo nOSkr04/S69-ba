@@ -1,9 +1,4 @@
-import path from "path";
 import Article from "../models/Article.js";
-import Lesson from "../models/Lesson.js";
-import Advice from "../models/Advice.js";
-import Story from "../models/Story.js";
-
 import MyError from "../utils/myError.js";
 import asyncHandler from "express-async-handler";
 import paginate from "../utils/paginate.js";
